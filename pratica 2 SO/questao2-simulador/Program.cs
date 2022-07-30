@@ -28,7 +28,16 @@
     {
         this.turnaround += exec;
     }
-
+    public string getBound()
+    {
+        if (this.cpuBound)
+            return "CPU";
+        return "IO";
+    }
+    public override string ToString()
+    {
+        return string.Join("", this.id, " - ", this.name, " ( Bound: ", this.getBound(), ", Priority: ", this.priority, ", CPU Time: ", this.cpuTime, ", Turnaround: ", this.turnaround, ")");
+    }
     public int getPriority()
     {
         return this.priority;
@@ -135,8 +144,54 @@ public class Program
 {
     static void Main()
     {
-        MultipleQueues algo = new MultipleQueues(10);
-        algo.start();
+        List<Process> listProcess = new List<Process>();
+        Console.WriteLine("Crie sua lista de Processos a seguir:");
+        Console.WriteLine("Quantos Processos deseja criar?");
+        int qtdProcess = Int32.Parse(Console.ReadLine());
+
+        for(int id = 1; id <= qtdProcess; id++)
+        {
+            Console.WriteLine("Qual o Nome do Processo?");
+            string name = Console.ReadLine();
+            Console.WriteLine("Qual a Prioridade do Processo?");
+            int priority = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Ele é CPU ou IO Bound?");
+            string boundStr = Console.ReadLine();
+            Console.WriteLine("Qual o tempo de CPU do Processo?");
+            int cpuTime = Int32.Parse(Console.ReadLine());
+            bool cpuBound = boundStr == "CPU";
+            bool ioBound = boundStr == "IO";
+            
+            Process process = new Process(id, name, priority, ioBound, cpuBound, cpuTime);
+            listProcess.Add(process);
+            Console.WriteLine(process);
+            Console.WriteLine();
+        }
+        Console.WriteLine("Qual o tempo do quantum da preempção (ms)?");
+        int timePreemp = Int32.Parse(Console.ReadLine());
+        Console.WriteLine("Qual Algoritmo deseja utilizar?\n1 - MultipleQueues\n2 - ?????????\n3 - ???????????");
+        int algoChoice = Int32.Parse(Console.ReadLine());
+        for(bool condition = true; condition;)
+        {
+            switch (algoChoice)
+            {
+                case 1:
+                    MultipleQueues algo = new MultipleQueues(timePreemp);
+                    algo.addListProcess(listProcess);
+                    algo.printer();
+                    condition = false;
+                    break;
+                case 2:
+                    condition = false;
+                    break;
+                case 3:
+                    condition = false;
+                    break;
+                default:
+                    Console.WriteLine("Escolha de novo...");
+                    break;
+            }
+        }
     }
 }
 
