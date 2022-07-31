@@ -81,7 +81,7 @@ namespace Simulador
                 Console.WriteLine(saida);
                 for (int l = 0; l < this.queues.Count; l++)
                 {
-                    for (int c = 0; c < this.queues[l].Count; c++)
+                    for (int c = 0; c < this.queues[l].Count; c++) // TODO: operação c++ é inacessível por conta do break no final do loop
                     {
                         Process process = this.queues[l][c];
                         this.queues[l].RemoveAt(c);

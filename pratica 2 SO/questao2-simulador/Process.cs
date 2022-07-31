@@ -76,7 +76,7 @@ namespace Simulador
 
         public override string ToString()
         {
-            return string.Join("(PID:", this.id, ", Name: ", this.name, ", Bound: ", this.GetBound(), ", Priority: ", this.priority, ", CPU Time: ", this.cpuTime, ", CPU Active: ", this.cpuTimeActive, ", Turnaround: ", this.turnaround, ", TaskAging: ", this.taskAging, " )");
+            return "(PID:" + this.id + ", Name: " + this.name + ", Bound: " + this.GetBound() + ", Priority: " + this.priority + ", CPU Time: " + this.cpuTime + ", CPU Active: " + this.cpuTimeActive + ", Turnaround: " + this.turnaround + ", TaskAging: " + this.taskAging + ")";
         }
 
         public void AddTurnaround(int e)

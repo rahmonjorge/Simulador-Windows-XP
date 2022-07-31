@@ -22,12 +22,7 @@ namespace Simulador
 
         public void Run()
         {
-            Console.WriteLine();
-            for (int countdown = 4; countdown > 0; countdown--)
-            {
-                Console.WriteLine("Starting in " + countdown + "s...");
-                Thread.Sleep(1000);
-            }
+            Console.WriteLine("Round Robin Simulation started.");
 
             PrintProcesses();
 
@@ -37,7 +32,7 @@ namespace Simulador
                 if (running == null)
                 {
                     running = ready.Dequeue();
-                    Console.WriteLine("-> Moved process '" + running.Name + "' from ready queue to the CPU.");
+                    Console.WriteLine("-> Moved '" + running.Name + "' from ready queue to the CPU.");
                     PrintProcesses();
                 }
 
@@ -77,6 +72,7 @@ namespace Simulador
                     running = null;
                 }
             }
+            PrintProcesses();
             Console.WriteLine("No processes ready nor running.\n");
 
             PrintStatistics();

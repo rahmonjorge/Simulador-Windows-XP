@@ -29,13 +29,12 @@ namespace Simulador
                     default:
                         break;
                 }
-
             }
         }
 
         private static void Simulador()
         {
-            List<Process>? processList = new List<Process>();
+            List<Process>? processList = null;
             Console.WriteLine("\nDeseja criar uma lista de processos ou selecionar uma lista pronta?");
             Console.WriteLine("[1] Ver listas prontas");
             Console.WriteLine("[2] Criar lista");
@@ -44,38 +43,38 @@ namespace Simulador
             {
                 case "1":
                     processList = SelecionarListaPronta();
-                    if (processList == null) Simulador();
                     break;
                 case "2":
                     processList = CriarLista();
                     break;
                 case "0":
-                    Main();
                     break;
                 default:
                     Console.WriteLine("Opção inválida.");
                     break;
             }
-
-            Console.Write("\nEscolha o tempo do quantum (ms): ");
-            int quantum = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("\nQual Algoritmo deseja utilizar?");
-            Console.WriteLine("[1] Multiple Queues");
-            Console.WriteLine("[2] Round Robin");
-            switch (GetChoice())
+            if (processList != null)
             {
-                case "1":
-                    MultipleQueues mq = new MultipleQueues(quantum);
-                    mq.AddProcessList(processList);
-                    mq.Run();
-                    break;
-                case "2":
-                    RoundRobin rr = new RoundRobin(processList, quantum);
-                    rr.Run();
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida.");
-                    break;
+                Console.Write("Escolha o tempo do quantum (ms): ");
+                int quantum = GetNumberInput(10);
+                Console.WriteLine("\nQual Algoritmo deseja utilizar?");
+                Console.WriteLine("[1] Multiple Queues");
+                Console.WriteLine("[2] Round Robin");
+                switch (GetChoice())
+                {
+                    case "1":
+                        MultipleQueues mq = new MultipleQueues(quantum);
+                        mq.AddProcessList(processList);
+                        mq.Run();
+                        break;
+                    case "2":
+                        RoundRobin rr = new RoundRobin(processList, quantum);
+                        rr.Run();
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida.");
+                        break;
+                }
             }
         }
 
@@ -121,30 +120,30 @@ namespace Simulador
             }
         }
 
-
-
         private static List<Process> CriarLista()
         {
             List<Process> processList = new List<Process>();
-            Console.WriteLine("Crie sua lista de Processos a seguir:");
-            Console.WriteLine("Quantos Processos deseja criar?");
-            int qtdProcess = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("\nAperte enter para inserir valores padrão.");
+            Console.Write("\nQuantidade de processos para criar: ");
+            int qtdProcess = GetNumberInput(1);
 
             for (int id = 1; id <= qtdProcess; id++)
             {
-                Console.WriteLine("Qual o Nome do Processo " + id + "?");
-                string name = Console.ReadLine();
-                Console.WriteLine("Qual a Prioridade do Processo?");
-                int priority = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Ele é CPU ou IO Bound?");
-                string boundStr = Console.ReadLine();
-                Console.WriteLine("Qual o tempo de CPU do Processo?");
-                int cpuTime = Int32.Parse(Console.ReadLine());
+                Console.Write("Nome do processo " + id + ": ");
+                string name = GetStrInput("process " + id);
+                Console.Write("Prioridade: ");
+                int priority = GetNumberInput(1);
+                Console.Write("Tempo de CPU: ");
+                int cpuTime = GetNumberInput(15);
+                Console.Write("CPU ou IO Bound: ");
+                string boundStr = Console.ReadLine() ?? "IO";
+
                 bool cpuBound = boundStr.ToUpper() == "CPU";
                 bool ioBound = boundStr.ToUpper() == "IO";
 
                 Process process = new Process(id, name, priority, ioBound, cpuBound, cpuTime);
                 processList.Add(process);
+                Console.Write("Processo criado: ");
                 Console.WriteLine(process);
                 Console.WriteLine();
             }
@@ -162,6 +161,24 @@ namespace Simulador
         {
             Console.Write("> ");
             return Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Recebe uma string de entrada do usuário e converte para inteiro. Se for vazia ou nula, retorna o valor padrão.
+        /// </summary>
+        private static int GetNumberInput(int std)
+        {
+            string? input = Console.ReadLine();
+            return (input == "" || input == null ? std : Int32.Parse(input!));
+        }
+
+        /// <summary>
+        /// Recebe uma string de entrada do usuário. Se for vazia ou nula, retorna o valor padrão.
+        /// </summary>
+        private static string GetStrInput(string std)
+        {
+            string? input = Console.ReadLine();
+            return (input == "" || input == null ? std : input);
         }
     }
 }
