@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj": {}
+    "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj": {
+    "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
+        "projectUniqueName": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
         "projectName": "questao2-simulador",
-        "projectPath": "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
-        "packagesPath": "C:\\Users\\rahmo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\obj\\",
+        "projectPath": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
+        "packagesPath": "C:\\Users\\luizm\\.nuget\\packages\\",
+        "outputPath": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rahmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\luizm\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -49,31 +47,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.osx-x64",
-              "version": "[6.0.3, 6.0.3]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-x64",
-              "version": "[6.0.3, 6.0.3]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.osx-x64",
-              "version": "[6.0.3, 6.0.3]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "osx-x64": {
-          "#import": []
         }
       }
     }

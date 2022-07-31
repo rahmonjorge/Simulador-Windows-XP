@@ -85,7 +85,12 @@ namespace Simulador
                     {
                         Process process = this.queues[l][c];
                         this.queues[l].RemoveAt(c);
+                        int difCPUTime = process.CPUTimeActive + timeExec - process.CPUTime;
+                        if (difCPUTime < 0)
+                            difCPUTime = 0;
+                        timeExec -= difCPUTime;
                         bool finalize = process.Execution(timeExec);
+
                         if (finalize)
                         {
                             this.finishedQueue.Add(process);

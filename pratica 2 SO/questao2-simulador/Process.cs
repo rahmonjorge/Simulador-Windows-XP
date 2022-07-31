@@ -9,7 +9,7 @@ namespace Simulador
         public int ID { get { return this.id; } set { this.id = value; } }
         public string Name { get { return this.name; } set { this.name = value; } }
         public int Priority { get { return this.priority; } set { this.priority = value; } }
-        public bool CPUBound { get { return this.CPUBound; } set { this.cpuBound = value; } }
+        public bool CPUBound { get { return this.cpuBound; } set { this.cpuBound = value; } }
         public int CPUTime { get { return this.cpuTime; } set { this.cpuTime = value; } }
         public int Turnaround { get { return this.turnaround; } set { this.turnaround = value; } }
         public int TaskAging { get { return this.taskAging; } set { this.taskAging = value; } }
