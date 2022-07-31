@@ -3,43 +3,179 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"sync"
 	"time"
 )
 
 var global1 int = 0
 var global2 int = 0
+var choice string = ""
 var mut1 sync.Mutex
 var mut2 sync.Mutex
 
+var colorRed string = "\033[31m"
+var colorGreen string = "\033[32m"
+var colorYellow string = "\033[33m"
 var colorReset string = "\033[0m"
+var colorBlue = "\033[34m"
+var colorPurple = "\033[35m"
+var colorCyan = "\033[36m"
+
+// var colorWhite = "\033[37m"
 
 func main() {
+	var exit = false
 
-	//colorRed := "\033[31m"
-	colorGreen := "\033[32m"
-	colorYellow := "\033[33m"
-	colorBlue := "\033[34m"
-	colorPurple := "\033[35m"
-	//colorCyan := "\033[36m"
-	colorWhite := "\033[37m"
+	for !exit {
+		PrintColor("\nWelcome to the concurrency test.", colorYellow)
+		fmt.Println("(1) Read explanation of program 1")
+		fmt.Println("(2) Execute program 1 with no mutexes")
+		fmt.Println("(3) Execute program 1 with mutexes")
+		fmt.Println("(4) Execute program 2")
+		fmt.Println("(0) Exit")
+		fmt.Print("> ")
+		fmt.Scanln(&choice)
 
-	// Init variables
-	iterations := 5
+		switch choice {
+		case "1":
+			fmt.Println("\nThere are two global variables, A and B.")
+			fmt.Println("Five threads will be accessing these variables.")
+			fmt.Println("")
+			fmt.Println("Every thread will INCREASE the value of A by 1, a million times.")
+			fmt.Println("Every thread will also DECREASE the value of B by 1, a million times.")
+			break
+		case "2":
+			run(false)
+			break
+		case "3":
+			run(true)
+			break
+		case "4":
+			run2()
+			break
+		case "0":
+			exit = true
+			break
+		default:
+			fmt.Println("Invalid option.")
+		}
+	}
+}
 
-	// Wait Group
+func run(mutexesEnabled bool) {
+	var threadCount int = 5
 	var wg sync.WaitGroup
-	wg.Add(iterations)
+	var exit = false
 
-	// Threads
-	go increment("[A]", colorWhite, &wg)
-	go increment("[B]", colorGreen, &wg)
-	go increment("[C]", colorYellow, &wg)
-	go increment("[D]", colorBlue, &wg)
-	go increment("[E]", colorPurple, &wg)
+	fmt.Print("\nMutexes enabled:")
+	var color string
+	if mutexesEnabled {
+		color = colorGreen
+	} else {
+		color = colorRed
+	}
+	PrintColor(strconv.FormatBool(mutexesEnabled), color)
 
-	// Wait
+	fmt.Println("\nPress enter to start.")
+
+	for !exit {
+		wg.Add(threadCount)
+		global1 = 0
+		global2 = 5_000_000
+
+		PrintColor("\n- Initial Values -", colorYellow)
+		fmt.Println("A: ", global1)
+		fmt.Println("B: ", global2)
+
+		fmt.Scanln(&choice)
+		if choice == "x" {
+			return
+		}
+
+		if mutexesEnabled {
+			go mutexthread(&wg)
+			go mutexthread(&wg)
+			go mutexthread(&wg)
+			go mutexthread(&wg)
+			go mutexthread(&wg)
+		} else {
+			go thread(&wg)
+			go thread(&wg)
+			go thread(&wg)
+			go thread(&wg)
+			go thread(&wg)
+		}
+
+		wg.Wait()
+
+		PrintColor("- Final Values - ", colorYellow)
+		fmt.Print("A:", global1)
+		if global1 < 5_000_000 {
+			missing := 5000000 - global1
+			result := fmt.Sprintf("(%d increment operations missing)", missing)
+			PrintColor(result, colorRed)
+		}
+		if global1 == 5_000_000 {
+			PrintColor("(no operations missing)", colorGreen)
+		}
+		fmt.Print("B:", global2)
+		if global2 > 0 {
+			result := fmt.Sprintf("(%d decrement operations missing)", global2)
+			PrintColor(result, colorRed)
+		}
+		if global2 == 0 {
+			PrintColor("(no operations missing)", colorGreen)
+		}
+		fmt.Print("\nPress enter to restart or X to exit.")
+		fmt.Scanln(&choice)
+		if choice == "x" {
+			exit = true
+		}
+	}
+}
+
+func thread(wg *sync.WaitGroup) {
+
+	for i := 0; i < 1_000_000; i++ {
+		global1++ // Critical zone
+	}
+
+	for i := 0; i < 1_000_000; i++ {
+		global2-- // Critical zone
+	}
+
+	wg.Done()
+}
+
+func mutexthread(wg *sync.WaitGroup) {
+
+	mut1.Lock()
+	for i := 0; i < 1_000_000; i++ {
+		global1++ // Critical zone
+	}
+	mut1.Unlock()
+
+	mut2.Lock()
+	for i := 0; i < 1_000_000; i++ {
+		global2-- // Critical zone
+	}
+	mut2.Unlock()
+
+	wg.Done()
+}
+
+func run2() {
+	var wg sync.WaitGroup
+	wg.Add(5)
+	go increment("[Thread 1]", colorBlue, &wg)
+	go increment("[Thread 2]", colorGreen, &wg)
+	go increment("[Thread 3]", colorPurple, &wg)
+	go increment("[Thread 4]", colorRed, &wg)
+	go increment("[Thread 5]", colorYellow, &wg)
 	wg.Wait()
+	fmt.Print("End of execution. Press enter to return.")
+	fmt.Scanln()
 }
 
 func increment(name string, color string, wg *sync.WaitGroup) {
@@ -47,9 +183,8 @@ func increment(name string, color string, wg *sync.WaitGroup) {
 	s1 := rand.NewSource(start.UnixNano())
 	r1 := rand.New(s1)
 	loop := 0
-	for loop < 20 {
+	for loop < 5 {
 		choice := r1.Intn(2) + 1
-		//fmt.Printf("%s %s%d\n", name, "Trying to read the global", choice)
 		fmt.Println(color, name, "Trying to read the global", choice, colorReset)
 		switch choice {
 		case 1:
@@ -89,4 +224,8 @@ func increment(name string, color string, wg *sync.WaitGroup) {
 	end := time.Now()
 	fmt.Println(color, name, "Time of this thread's execution: ", time.Time.Sub(end, start), colorReset)
 	wg.Done()
+}
+
+func PrintColor(text string, color string) {
+	fmt.Println(color, text, colorReset)
 }
