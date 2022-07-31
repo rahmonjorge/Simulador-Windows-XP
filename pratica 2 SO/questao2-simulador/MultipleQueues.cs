@@ -1,3 +1,6 @@
+/// <summary>
+/// Classe implementada por Luiz Miguel
+/// </summary>
 namespace Simulador
 {
     public class MultipleQueues
@@ -29,7 +32,7 @@ namespace Simulador
                 else
                     finalPriority += 2;
             }
-            this.queues[finalPriority].Add(process);
+            this.queues[finalPriority].Add(process); // TODO: stack overflow
             this.readyQueue.Add(process);
         }
 
