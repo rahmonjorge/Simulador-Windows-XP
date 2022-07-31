@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "tJoOsxS1vygI7pakj2BpsTMwT/NcVSenX5X+/pCPcD0ISbPFgIRvK4ug8oy1Hsb1ndpQWoZxptVx3W6N1cp3Og==",
+  "dgSpecHash": "IcZZOaVwfeqpsXrEW4kXjIJIEkq5GA9ZAijTSepu/o8E9jaWX5bb+84xRngBaAfTi1XDoXwx1WDmcLmM2lNjrQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\rahmo\\Documents\\WORKSPACES\\PROGRAMMING WORKSPACE\\Go\\workspace\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\rahmo\\.nuget\\packages\\microsoft.netcore.app.runtime.osx-x64\\6.0.3\\microsoft.netcore.app.runtime.osx-x64.6.0.3.nupkg.sha512",
+    "C:\\Users\\rahmo\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.osx-x64\\6.0.3\\microsoft.aspnetcore.app.runtime.osx-x64.6.0.3.nupkg.sha512",
+    "C:\\Users\\rahmo\\.nuget\\packages\\microsoft.netcore.app.host.osx-x64\\6.0.3\\microsoft.netcore.app.host.osx-x64.6.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
