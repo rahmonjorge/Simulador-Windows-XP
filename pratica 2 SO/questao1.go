@@ -32,7 +32,8 @@ func main() {
 		fmt.Println("(1) Read explanation of program 1")
 		fmt.Println("(2) Execute program 1 with no mutexes")
 		fmt.Println("(3) Execute program 1 with mutexes")
-		fmt.Println("(4) Execute program 2")
+		fmt.Println("(4) Execute program 2 with no mutexes")
+		fmt.Println("(5) Execute program 2 with mutexes")
 		fmt.Println("(0) Exit")
 		fmt.Print("> ")
 		fmt.Scanln(&choice)
@@ -52,7 +53,10 @@ func main() {
 			run(true)
 			break
 		case "4":
-			run2()
+			run2(false)
+			break
+		case "5":
+			run2(true)
 			break
 		case "0":
 			exit = true
@@ -165,59 +169,76 @@ func mutexthread(wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func run2() {
+func run2(mut bool) {
 	var wg sync.WaitGroup
 	wg.Add(5)
-	go increment("[Thread 1]", colorBlue, &wg)
-	go increment("[Thread 2]", colorGreen, &wg)
-	go increment("[Thread 3]", colorPurple, &wg)
-	go increment("[Thread 4]", colorRed, &wg)
-	go increment("[Thread 5]", colorYellow, &wg)
+	go increment("[Thread 1]", colorBlue, &wg, mut)
+	go increment("[Thread 2]", colorGreen, &wg, mut)
+	go increment("[Thread 3]", colorPurple, &wg, mut)
+	go increment("[Thread 4]", colorRed, &wg, mut)
+	go increment("[Thread 5]", colorYellow, &wg, mut)
 	wg.Wait()
 	fmt.Print("End of execution. Press enter to return.")
 	fmt.Scanln()
 }
 
-func increment(name string, color string, wg *sync.WaitGroup) {
+func increment(name string, color string, wg *sync.WaitGroup, mut bool) {
 	start := time.Now()
 	s1 := rand.NewSource(start.UnixNano())
 	r1 := rand.New(s1)
 	loop := 0
 	for loop < 5 {
 		choice := r1.Intn(2) + 1
-		fmt.Println(color, name, "Trying to read the global", choice, colorReset)
+		if mut {
+			fmt.Println(color, name, "Trying to read the global", choice, colorReset)
+		}
 		switch choice {
 		case 1:
-			if mut1.TryLock() {
-				fmt.Println(color, name, "Reading global1 as: ", global1, colorReset)
-				fmt.Println(color, mut1, colorReset)
+			if mut {
+				if mut1.TryLock() {
+					fmt.Println(color, name, "Reading global1 as: ", global1, colorReset)
+				} else {
+					fmt.Println(color, name, "Blocked, awaiting access to global1...", colorReset)
+					mut1.Lock()
+					fmt.Println(color, name, "Reading global1 as: ", global1, colorReset)
+				}
+				for i := 0; i < 5; i++ {
+					global1 += 1
+					time.Sleep(600 * time.Millisecond)
+				}
+				fmt.Println(color, name, "I changed global1 value. Now it is: ", global1, colorReset)
+				mut1.Unlock()
 			} else {
-				fmt.Println(color, name, "Blocked, awaiting access to global1...", colorReset)
-				mut1.Lock()
 				fmt.Println(color, name, "Reading global1 as: ", global1, colorReset)
+				for i := 0; i < 5; i++ {
+					global1 += 1
+					time.Sleep(600 * time.Millisecond)
+				}
+				fmt.Println(color, name, "I changed global1 value. Now it is: ", global1, colorReset)
 			}
-			for i := 0; i < 5; i++ {
-				global1 += 1
-				time.Sleep(10 * time.Millisecond)
-			}
-			fmt.Println(color, name, "I changed global1 value. Now it is: ", global1, colorReset)
-			mut1.Unlock()
-
 		case 2:
-			if mut2.TryLock() {
-				fmt.Println(color, name, "Reading global2 as: ", global2, colorReset)
-				fmt.Println(color, mut2, colorReset)
+			if mut {
+				if mut2.TryLock() {
+					fmt.Println(color, name, "Reading global2 as: ", global2, colorReset)
+				} else {
+					fmt.Println(color, name, "Blocked, awaiting access to global2...", colorReset)
+					mut2.Lock()
+					fmt.Println(color, name, "Reading global2 as: ", global2, colorReset)
+				}
+				for i := 0; i < 5; i++ {
+					global2 += 1
+					time.Sleep(600 * time.Millisecond)
+				}
+				fmt.Println(color, name, "I changed global2 value. Now it is: ", global2, colorReset)
+				mut2.Unlock()
 			} else {
-				fmt.Println(color, name, "Blocked, awaiting access to global2...", colorReset)
-				mut2.Lock()
 				fmt.Println(color, name, "Reading global2 as: ", global2, colorReset)
+				for i := 0; i < 5; i++ {
+					global2 += 1
+					time.Sleep(600 * time.Millisecond)
+				}
+				fmt.Println(color, name, "I changed global2 value. Now it is: ", global2, colorReset)
 			}
-			for i := 0; i < 5; i++ {
-				global2 += 1
-				time.Sleep(100 * time.Millisecond)
-			}
-			fmt.Println(color, name, "I changed global2 value. Now it is: ", global2, colorReset)
-			mut2.Unlock()
 		}
 		loop += 1
 	}
