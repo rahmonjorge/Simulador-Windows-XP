@@ -65,7 +65,6 @@ namespace Simulador
         {
             for (bool condition = true; condition;)
             {
-                bool executed = false;
                 int timeExec = 1;
                 this.Printer();
                 string saida = "Ready: ";
@@ -81,8 +80,9 @@ namespace Simulador
                 Console.WriteLine(saida);
                 for (int l = 0; l < this.queues.Count; l++)
                 {
-                    for (int c = 0; c < this.queues[l].Count; c++) // TODO: operação c++ é inacessível por conta do break no final do loop
+                    if (this.queues[l].Count > 0)
                     {
+                        int c = 0;
                         Process process = this.queues[l][c];
                         this.queues[l].RemoveAt(c);
                         int difCPUTime = process.CPUTimeActive + timeExec - process.CPUTime;
@@ -108,19 +108,14 @@ namespace Simulador
                                 Console.WriteLine("[Preemption] " + process.Name + " movido para a fila" + string.Join("", queue));
                             }
                         }
-                        executed = true;
+                        Thread.Sleep(timeExec + this.quantPreempcao);
+                        this.CheckTaskAging();
+                        this.UpdateReadyQueue();
                         break;
                     }
                     timeExec *= 2;
-
-                    if (executed)
-                    {
-                        this.UpdateReadyQueue();
-                        this.CheckTaskAging();
-                        break;
-                    }
-                    else if (l + 1 == this.queues.Count)
-                        condition = false;
+                    if (l + 1 == this.queues.Count)
+                            condition = false;
                 }
                 Console.WriteLine();
             }
@@ -135,7 +130,7 @@ namespace Simulador
 
         public void UpdateReadyQueue()
         {
-            this.readyQueue.RemoveRange(0, this.readyQueue.Count);
+            this.readyQueue.RemoveRange(0, readyQueue.Count);
             foreach (List<Process> itemY in this.queues)
             {
                 foreach (Process itemX in itemY)
@@ -149,12 +144,15 @@ namespace Simulador
                 for (int c = 0; c < this.queues[l].Count; c++)
                 {
                     Process process = this.queues[l][c];
-                    if (process.TaskAging >= this.quantPreempcao * 100)
+                    if (process.TaskAging >= this.quantPreempcao * 50)
                     {
                         this.queues[l].RemoveAt(c);
                         process.ResetTaskAging();
-                        this.queues[l - 1].Add(process);
-                        Console.WriteLine(string.Join(" ", "[TaskAging]", process.Name, "movido para fila", l - 1));
+                        if (l - 1 >= 0)
+                        {
+                            this.queues[l - 1].Add(process);
+                            Console.WriteLine(string.Join(" ", "[TaskAging]", process.Name, "movido para fila", l - 1));
+                        }
                     }
                 }
             }
@@ -173,16 +171,17 @@ namespace Simulador
 
         public void Printer()
         {
+            string saida = "";
             for (int l = 0; l < this.queues.Count; l++)
             {
-                Console.Write(string.Join("", "Queue ", l.ToString(), ":  "));
+                saida += string.Join("", "Queue ", l.ToString(), ":  ");
                 for (int c = 0; c < this.queues[l].Count; c++)
                 {
-                    string saida = string.Join("", this.queues[l][c].Name, " (", this.queues[l][c].CPUTimeActive.ToString(), " / ", this.queues[l][c].CPUTime.ToString(), ")  -->  ");
-                    Console.Write(saida);
+                    saida += string.Join("", this.queues[l][c].Name, " (", this.queues[l][c].CPUTimeActive.ToString(), " / ", this.queues[l][c].CPUTime.ToString(), ")  -->  ");
                 }
-                Console.WriteLine();
+                saida += "\n";
             }
+            Console.Write(saida);
         }
     }
 }
