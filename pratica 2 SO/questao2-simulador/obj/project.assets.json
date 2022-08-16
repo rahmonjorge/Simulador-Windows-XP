@@ -8,24 +8,26 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\luizm\\.nuget\\packages\\": {}
+    "C:\\Users\\rahmo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
+      "projectUniqueName": "C:\\Users\\rahmo\\Documents\\DOCUMENTOS\\UFRPE\\Sistemas Operacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
       "projectName": "questao2-simulador",
-      "projectPath": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
-      "packagesPath": "C:\\Users\\luizm\\.nuget\\packages\\",
-      "outputPath": "D:\\AppsFacul\\SistemasOperacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\obj\\",
+      "projectPath": "C:\\Users\\rahmo\\Documents\\DOCUMENTOS\\UFRPE\\Sistemas Operacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\questao2-simulador.csproj",
+      "packagesPath": "C:\\Users\\rahmo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rahmo\\Documents\\DOCUMENTOS\\UFRPE\\Sistemas Operacionais\\sistemas-operacionais\\pratica 2 SO\\questao2-simulador\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\luizm\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\rahmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
