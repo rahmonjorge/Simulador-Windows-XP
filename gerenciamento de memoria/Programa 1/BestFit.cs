@@ -1,6 +1,6 @@
-public class FirstFit{
+public class BestFit{
     //Recebe inicialmente o head do MemoryManager e o processo p a ser alocado
-    public void Run(MemorySegment current, Process p){
+    public void Run(MemorySegment current, Process p, int smaller){
         MemorySegment next = current.next;
         if(next.State == 'L' && next.length >= current.length){
             MemorySegment newSeg = new MemorySegment(p, next.begin, next.length);
