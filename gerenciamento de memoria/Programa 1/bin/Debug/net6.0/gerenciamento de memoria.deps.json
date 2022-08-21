@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "gerenciamento de memoria/1.0.0": {
+        "runtime": {
+          "gerenciamento de memoria.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "gerenciamento de memoria/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
