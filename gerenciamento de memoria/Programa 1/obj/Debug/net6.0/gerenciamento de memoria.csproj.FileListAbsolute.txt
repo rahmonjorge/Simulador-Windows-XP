@@ -28,3 +28,18 @@ C:\Users\rahmo\Documents\DOCUMENTOS\UFRPE\Sistemas Operacionais\sistemas-operaci
 C:\Users\rahmo\Documents\DOCUMENTOS\UFRPE\Sistemas Operacionais\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.pdb
 C:\Users\rahmo\Documents\DOCUMENTOS\UFRPE\Sistemas Operacionais\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.genruntimeconfig.cache
 C:\Users\rahmo\Documents\DOCUMENTOS\UFRPE\Sistemas Operacionais\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\ref\gerenciamento de memoria.dll
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\bin\Debug\net6.0\gerenciamento de memoria.exe
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\bin\Debug\net6.0\gerenciamento de memoria.deps.json
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\bin\Debug\net6.0\gerenciamento de memoria.runtimeconfig.json
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\bin\Debug\net6.0\gerenciamento de memoria.dll
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\bin\Debug\net6.0\gerenciamento de memoria.pdb
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.csproj.AssemblyReference.cache
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.AssemblyInfoInputs.cache
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.AssemblyInfo.cs
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.csproj.CoreCompileInputs.cache
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.dll
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\refint\gerenciamento de memoria.dll
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.pdb
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\gerenciamento de memoria.genruntimeconfig.cache
+C:\Users\eduar\OneDrive\Área de Trabalho\SO_softwares\sistemas-operacionais\gerenciamento de memoria\Programa 1\obj\Debug\net6.0\ref\gerenciamento de memoria.dll

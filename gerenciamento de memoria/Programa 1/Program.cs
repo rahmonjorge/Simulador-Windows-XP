@@ -2,7 +2,7 @@
 using System.Threading;
 using Simulador;
 
-static class Program
+public static class Program
 {
     static void Main()
     {
@@ -28,12 +28,17 @@ static class Program
         manager.RemoveProcess(3);
         manager.RemoveProcess(4);
         manager.RemoveProcess(5);
-        manager.RemoveProcess(8);
+        manager.RemoveProcess(7);
 
         Console.WriteLine("\n Compactando:");
 
         //Console.WriteLine("Espaço não-segmentado: " + manager.memorySize - );
 
         manager.Compact();
+
+        Console.WriteLine("\n First Fit:");
+        manager.head = FirstFit.Run(manager.head, new Process(10, 7));
+        manager.head.Print();
+
     }
 }

@@ -1,4 +1,6 @@
-class MemoryManager
+using System;
+
+public class MemoryManager
 {
     public MemorySegment? head;
     public int memorySize;

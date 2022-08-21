@@ -1,6 +1,7 @@
+using System;
 using Simulador;
 
-class MemorySegment
+public class MemorySegment
 {
     public Process? process; // Processo contido no segmento.
     public int begin; // Endereço onde começa o segmento
@@ -37,7 +38,7 @@ class MemorySegment
     {
         if (this.process != null && this.process.PID == PID) this.process = null; // Se este processo é igual ao que está sendo procurado, remover.
         else if (this.next != null) this.next.RemoveProcess(PID); // Caso contrário, verificar o próximo.
-        else throw new KeyNotFoundException("No process found with the PID: " + PID);
+        else throw new Exception("No process found with the PID: " + PID);
     }
 
     // Adiciona um novo segmento ao final da lista.
