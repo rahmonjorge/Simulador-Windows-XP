@@ -12,35 +12,88 @@ class MemorySegment
         get { return this.process == null ? 'L' : 'P'; }
     }
 
-    public MemorySegment(int begin, Process p)
+    public MemorySegment(Process? p, int begin, int length)
     {
         this.process = p;
         this.begin = begin;
-        this.length = p.size;
+        this.length = length;
     }
 
-    public void Add(Process p, int limit)
+    // Adiciona um novo segmento contendo um processo ao final da lista.
+    public void AddProcessSegment(Process p, int limit)
     {
         if (this.next == null)
         {
-            MemorySegment newSegment = new MemorySegment(this.End() + 1, p);
+            MemorySegment newSegment = new MemorySegment(p, this.End() + 1, p.size);
 
             if (newSegment.End() >= limit) throw new Exception("New segment doesn't fit in memory.");
             else this.next = newSegment;
         }
-        else next.Add(p, limit);
+        else next.AddProcessSegment(p, limit);
     }
 
-    public void Remove(int PID)
+    // Libera um segmento de memória que está ocupado pelo processo especificado.
+    public void RemoveProcess(int PID)
     {
         if (this.process != null && this.process.PID == PID) this.process = null; // Se este processo é igual ao que está sendo procurado, remover.
-        else if (this.next != null) this.next.Remove(PID); // Caso contrário, verificar o próximo.
+        else if (this.next != null) this.next.RemoveProcess(PID); // Caso contrário, verificar o próximo.
         else throw new KeyNotFoundException("No process found with the PID: " + PID);
     }
 
-    private int End()
+    // Adiciona um novo segmento ao final da lista.
+    public void AddSegment(int size)
     {
-        return this.begin + this.length - 1; // Se começa em 0, e o tamanho é 5, a última posição é 4.
+        if (this.next == null) this.next = new MemorySegment(null, this.End() + 1, size);
+        else next.AddSegment(size);
+    }
+
+    // Move todos os espaços vazios encontrados para o final da lista.
+    public void Compact()
+    {
+        while (this.IsFragmented())
+        {
+            this.MoveEmpty();
+        }
+    }
+
+    // Verifica se há necessidade de compactação.
+    public bool IsFragmented()
+    {
+        if (this.next != null)
+        {
+            if (this.State == 'L' && this.next.State == 'P')
+            {
+                return true;
+            }
+            else
+            {
+                return this.next.IsFragmented();
+            }
+        }
+        return false;
+    }
+
+    // Move o primeiro espaço vazio encontrado para o final da lista
+    private void MoveEmpty()
+    {
+        MemorySegment? freeSpace = null;
+
+        if (this.next != null)
+        {
+            if (this.next.State == 'L') // Se o próximo segmento está livre
+            {
+                freeSpace = this.next; // Salvar o proximo numa variável
+                this.next = freeSpace.next; // Unir a ponta do próximo com o meu próximo (remover o espaço livre)
+            }
+            else
+                this.next.MoveEmpty();
+        }
+
+        if (freeSpace != null)
+        {
+            freeSpace.next = null; // Cortar a cauda do freespace, pois ele ira pro final da lista
+            this.AddSegment(freeSpace.length); // Adicionar o espaço vazio no final da lista
+        }
     }
 
     public void Print()
@@ -49,5 +102,10 @@ class MemorySegment
         else Printer.Blue($"[{this.State}/{this.begin}/{this.length}] -> ");
         if (this.next != null) this.next.Print();
         else Printer.Red("null\n");
+    }
+
+    private int End()
+    {
+        return this.begin + this.length - 1; // Se começa em 0, e o tamanho é 5, a última posição é 4.
     }
 }
