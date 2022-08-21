@@ -1,6 +1,6 @@
 class MemoryManager
 {
-    private MemorySegment? head;
+    public MemorySegment? head;
     public int memorySize;
     public bool show;
     public bool step;
