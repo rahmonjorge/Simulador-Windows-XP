@@ -1,4 +1,4 @@
-class Process
+public class Process
 {
     public int PID;
     public int size;

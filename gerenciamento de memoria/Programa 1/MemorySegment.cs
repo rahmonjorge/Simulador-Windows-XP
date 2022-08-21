@@ -1,6 +1,6 @@
 using Simulador;
 
-class MemorySegment
+public class MemorySegment
 {
     public Process? process; // Processo contido no segmento.
     public int begin; // Endereço onde começa o segmento
