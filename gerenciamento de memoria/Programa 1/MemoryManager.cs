@@ -1,15 +1,23 @@
 using System;
+/* 
 
+Implementação do gerenciador de memória. A estrutura que representa a mesma é uma lista duplamente encadeada.
+
+ */
 public class MemoryManager
 {
     public MemorySegment? head;
+    public int idHead;
     public int memorySize;
     public bool show;
     public bool step;
 
+    public static Random ranNum = new Random();
+
     public MemoryManager(int memorySize)
     {
         this.memorySize = memorySize;
+        this.idHead = ranNum.Next(100,200);
     }
 
 
@@ -19,7 +27,9 @@ public class MemoryManager
     /// <param name="size"></param>
     public void AddSegment(int size)
     {
-        if (this.head == null) this.head = new MemorySegment(null, 0, size);
+        if (this.head == null){
+            this.head = new MemorySegment(null, 0, size, null);
+        }
         else this.head.AddSegment(size);
         Step();
     }
@@ -34,8 +44,12 @@ public class MemoryManager
     /// </summary>
     public void AddProcess(Process p)
     {
-        if (this.head == null) this.head = new MemorySegment(p, 0, p.size); // Se a cabeça da lista é vazia, crie um segmento na posição zero.
-        else this.head.AddProcessSegment(p, memorySize); // Caso contrário, adicione no final da lista.
+        if (this.head == null){
+            this.head = new MemorySegment(p, 0, p.size, null); // Se a cabeça da lista é vazia, crie um segmento na posição zero.
+        }
+        else{
+            this.head.AddProcessSegment(p, memorySize); // Caso contrário, adicione no final da lista.
+        }
         Step();
     }
 

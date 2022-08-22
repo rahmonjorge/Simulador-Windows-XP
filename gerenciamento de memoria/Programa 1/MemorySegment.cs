@@ -6,18 +6,24 @@ public class MemorySegment
     public Process? process; // Processo contido no segmento.
     public int begin; // Endereço onde começa o segmento
     public int length; // Comprimento do segmento
+    public MemorySegment? prev = null; //Aponta para o segmento anterior
     public MemorySegment? next = null; // Aponta para o próximo segmento
+
+    //public static Random ranNum = new Random();
+    public int id; //Identificador do segmento
 
     public char State // Indica se há ou não um processo no segmento.
     {
         get { return this.process == null ? 'L' : 'P'; }
     }
 
-    public MemorySegment(Process? p, int begin, int length)
-    {
+    public MemorySegment(Process? p, int begin, int length, MemorySegment? prev)
+    {     
         this.process = p;
         this.begin = begin;
         this.length = length;
+        this.prev = prev;
+        this.id = 0;
     }
 
     // Adiciona um novo segmento contendo um processo ao final da lista.
@@ -25,12 +31,15 @@ public class MemorySegment
     {
         if (this.next == null)
         {
-            MemorySegment newSegment = new MemorySegment(p, this.End() + 1, p.size);
+            MemorySegment newSegment = new MemorySegment(p, this.End() + 1, p.size, this);
+            newSegment.id = this.id + 1;
 
             if (newSegment.End() >= limit) throw new Exception("New segment doesn't fit in memory.");
             else this.next = newSegment;
         }
-        else next.AddProcessSegment(p, limit);
+        else {
+            next.AddProcessSegment(p, limit);
+        }
     }
 
     // Libera um segmento de memória que está ocupado pelo processo especificado.
@@ -44,7 +53,7 @@ public class MemorySegment
     // Adiciona um novo segmento ao final da lista.
     public void AddSegment(int size)
     {
-        if (this.next == null) this.next = new MemorySegment(null, this.End() + 1, size);
+        if (this.next == null) this.next = new MemorySegment(null, this.End() + 1, size, this);
         else next.AddSegment(size);
     }
 
@@ -99,8 +108,8 @@ public class MemorySegment
 
     public void Print()
     {
-        if (this.State == 'L') Printer.Green($"[{this.State}/{this.begin}/{this.length}] -> ");
-        else Printer.Blue($"[{this.State}/{this.begin}/{this.length}] -> ");
+        if (this.State == 'L') Printer.Green($"[{this.State}/{this.begin}/{this.length}]<->");
+        else Printer.Blue($"[{this.State}/{this.begin}/{this.length}]<->");
         if (this.next != null) this.next.Print();
         else Printer.Red("null\n");
     }
