@@ -1,23 +1,19 @@
-namespace Program1
+public static class FirstFit
 {
-    public class FirstFit : Algorithm
+    /* 
+    <FUNCIONAMENTO>A função recebe o nó pai/cabeça da lista (head) e o processo a ser alocado
+        <> O melhor encaixe é definido pelo primeiro segmento em que couber o processo.
+     */
+    public static MemorySegment Run(MemorySegment current, Process p)
     {
-        //Recebe inicialmente o head do MemoryManager e o processo p a ser alocado
-        public MemorySegment AddProcess(MemorySegment current, Process p)
+        if (current.State == 'L' && current.length >= p.size)
         {
-            if (current.State == 'L' && current.length >= p.size)
-            {
-                current.process = p;
-            }
-            else if (current.next != null)
-            {
-                AddProcess(current.next, p);
-            }
-            else
-            {
-                throw new NoSegmentFitException();
-            }
-            return current;
+            current.process = p;
         }
+        else
+        {
+            Run(current.next, p);
+        }
+        return current;
     }
 }
