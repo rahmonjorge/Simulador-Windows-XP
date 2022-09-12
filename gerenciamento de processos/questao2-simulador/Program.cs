@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using HTools;
+
+/// <summary>
 /// Classe implementada por Luiz Miguel e Rahmon Jorge
 /// </summary>
 namespace Simulador

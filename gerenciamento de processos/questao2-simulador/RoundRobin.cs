@@ -1,3 +1,5 @@
+using HTools;
+
 /// <summary>
 /// Classe implementada por Rahmon Jorge
 /// </summary>
@@ -86,12 +88,12 @@ namespace Simulador
         {
             Console.WriteLine();
             Console.Write("READY: ");
-            foreach (Process p in ready) Printer.PrintProcessStatusColor(p);
+            foreach (Process p in ready) PrintProcessStatusColor(p);
             Console.WriteLine();
-            Console.Write("RUNNING: "); Printer.PrintProcessStatusColor(running);
+            Console.Write("RUNNING: "); PrintProcessStatusColor(running);
             Console.WriteLine();
             Console.Write("FINISHED: ");
-            foreach (Process p in finished) Printer.PrintProcessStatusColor(p);
+            foreach (Process p in finished) PrintProcessStatusColor(p);
             Console.Write("\n\nPress for next step...");
             Console.ReadLine();
             Console.WriteLine();
@@ -107,6 +109,37 @@ namespace Simulador
             Console.WriteLine("- STATISTICS -");
             foreach (string s in output) Console.WriteLine(s);
             Console.WriteLine("Average wait time for all processes: " + this.totalWaitTime / finished.Count + "ms");
+        }
+
+        public static void PrintProcessStatusColor(Process? p)
+        {
+            if (p == null) return;
+            string s = "(" + p.Name + ":" + p.TimeLeft + "ms)";
+            ConsoleColor color = ConsoleColor.White;
+            switch (p.ID)
+            {
+                case 1:
+                    color = ConsoleColor.DarkRed;
+                    break;
+                case 2:
+                    color = ConsoleColor.DarkYellow;
+                    break;
+                case 3:
+                    color = ConsoleColor.DarkGreen;
+                    break;
+                case 4:
+                    color = ConsoleColor.DarkBlue;
+                    break;
+                case 5:
+                    color = ConsoleColor.DarkMagenta;
+                    break;
+                case 6:
+                    color = ConsoleColor.Magenta;
+                    break;
+                default:
+                    break;
+            }
+            Printer.PrintColor(s, color);
         }
     }
 }

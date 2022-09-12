@@ -2,38 +2,69 @@
 using System.Threading;
 using Simulador;
 
-static class Program
+namespace Program1
 {
-    static void Main()
+    public static class Program
     {
-        MemoryManager manager = new MemoryManager(100);
-        manager.show = true;
-        manager.step = false;
+        public const int MEMSIZE = 100;
 
-        Console.WriteLine("\nAdicionando processos:");
+        static void Main()
+        {
+            MemoryManager manager = new MemoryManager(MEMSIZE);
+            manager.show = true;
+            manager.step = false;
 
-        manager.AddProcess(new Process(1, 1));
-        manager.AddProcess(new Process(2, 2));
-        manager.AddProcess(new Process(3, 3));
-        manager.AddProcess(new Process(4, 4));
-        manager.AddProcess(new Process(5, 5));
-        manager.AddProcess(new Process(6, 6));
-        manager.AddProcess(new Process(7, 7));
-        manager.AddProcess(new Process(8, 8));
+            Console.WriteLine("\nCriando Segmentos:");
+
+            manager.AddSegment(1);
+            manager.AddSegment(2);
+            manager.AddSegment(3);
+            manager.AddSegment(4);
+            manager.AddSegment(5);
+            manager.AddSegment(6);
+            manager.AddSegment(7);
+            manager.AddSegment(8);
+            manager.AddSegment(9);
+            manager.AddSegment(10);
+
+            Console.WriteLine("\n Adicionando Processos com First Fit:");
+
+            Algorithm ff = new FirstFit();
+
+            manager.AddProcess(new Process(1, 4), ff);
+            manager.AddProcess(new Process(1, 12), ff);
+            manager.AddProcess(new Process(1, 20), ff);
+            manager.AddProcess(new Process(1, 19), ff);
+
+            /*
+                manager.AddProcess(new Process(1, 1));
+                manager.AddProcess(new Process(2, 2));
+                manager.AddProcess(new Process(3, 3));
+                manager.AddProcess(new Process(4, 4));
+                manager.AddProcess(new Process(5, 5));
+                manager.AddProcess(new Process(6, 6));
+                manager.AddProcess(new Process(7, 7));
+                manager.AddProcess(new Process(8, 8));
 
 
-        Console.WriteLine("\n Removendo processos:");
 
-        manager.RemoveProcess(2);
-        manager.RemoveProcess(3);
-        manager.RemoveProcess(4);
-        manager.RemoveProcess(5);
-        manager.RemoveProcess(8);
 
-        Console.WriteLine("\n Compactando:");
+                manager.RemoveProcess(2);
+                manager.RemoveProcess(3);
+                manager.RemoveProcess(4);
+                manager.RemoveProcess(5);
+                manager.RemoveProcess(7);
 
-        //Console.WriteLine("Espaço não-segmentado: " + manager.memorySize - );
+                Console.WriteLine("\n Compactando:");
 
-        manager.Compact();
+                //Console.WriteLine("Espaço não-segmentado: " + manager.memorySize - );
+
+                manager.Compact();
+
+                Console.WriteLine("\n First Fit:");
+                //manager.head = FirstFit.Run(manager.head, new Process(10, 7));
+                manager.head.Print();
+        */
+        }
     }
 }

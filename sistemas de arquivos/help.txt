@@ -1,0 +1,6 @@
+delete      <name>                  deletes a file or a directory.
+fat                                 shows information for all files.
+fileinfo    <filename>              shows file allocation information.
+newfile     <filename> <size>       creates a new file
+newdir      <name>                  creates a new directory.
+reset                               resets simulation.

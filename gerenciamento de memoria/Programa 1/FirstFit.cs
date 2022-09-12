@@ -1,24 +1,23 @@
-public class FirstFit
+namespace Program1
 {
-    //Recebe inicialmente o head do MemoryManager e o processo p a ser alocado
-    public void Run(MemorySegment current, Process p)
+    public class FirstFit : Algorithm
     {
-        MemorySegment next = current.next;
-        if (next.State == 'L' && next.length >= current.length)
+        //Recebe inicialmente o head do MemoryManager e o processo p a ser alocado
+        public MemorySegment AddProcess(MemorySegment current, Process p)
         {
-            MemorySegment newSeg = new MemorySegment(p, next.begin, next.length);
-            newSeg.next = next.next; //o novo segmento eh ligado ao proximo
-            current.next = newSeg; //o espaco vazio eh desligado do proximo segmento
-            //[TO-DO?] desalocar instancia de next?
+            if (current.State == 'L' && current.length >= p.size)
+            {
+                current.process = p;
+            }
+            else if (current.next != null)
+            {
+                AddProcess(current.next, p);
+            }
+            else
+            {
+                throw new NoSegmentFitException();
+            }
+            return current;
         }
-        else if (next.State == 'P')
-        {
-            this.Run(next, p);
-        }
-        else
-        {
-            //Iterador chega no fim da memoria e nao encontra espacos vazios
-        }
-
     }
 }

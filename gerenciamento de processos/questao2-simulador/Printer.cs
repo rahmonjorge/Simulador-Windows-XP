@@ -1,46 +1,15 @@
 using System;
 
-namespace Simulador
+namespace HTools
 {
     // Class that encapsulates Console output.
 
     public static class Printer
     {
-        // Print text in rainbow colors... what? why not?
+        // Prints text in rainbow colors... what? why not?
         public static void ShowWelcomeScreen(string welcomeText)
         {
             PrintRainbowLn(welcomeText);
-        }
-
-        public static void PrintProcessStatusColor(Process? p)
-        {
-            if (p == null) return;
-            string s = "(" + p.Name + ":" + p.TimeLeft + "ms)";
-            ConsoleColor color = ConsoleColor.White;
-            switch (p.ID)
-            {
-                case 1:
-                    color = ConsoleColor.DarkRed;
-                    break;
-                case 2:
-                    color = ConsoleColor.DarkYellow;
-                    break;
-                case 3:
-                    color = ConsoleColor.DarkGreen;
-                    break;
-                case 4:
-                    color = ConsoleColor.DarkBlue;
-                    break;
-                case 5:
-                    color = ConsoleColor.DarkMagenta;
-                    break;
-                case 6:
-                    color = ConsoleColor.Magenta;
-                    break;
-                default:
-                    break;
-            }
-            PrintColor(s, color);
         }
 
         public static void PrintColor(string msg, ConsoleColor color)
