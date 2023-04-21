@@ -12,7 +12,7 @@ Você pode clonar o repositório ou baixar o executável: [Simulador-Windows-XP.
 
 ## Capturas de Tela
 
-![image](https://user-images.githubusercontent.com/44070986/233531524-0dc664ff-a7f8-4f10-a09f-a276d51fea58.png)
+![image](https://user-images.githubusercontent.com/44070986/233531579-67224de3-38f6-4291-ab89-3876fc5d977c.png)
 
 ## Sobre
 Os simuladores presentes neste programa foram desenvolvidos de Julho a Setembro de 2022 para a disciplina de Sistemas Operacionais na Universidade Federal Rural de Pernambuco.
