@@ -1,5 +1,11 @@
 # Simulador Windows XP
 
+## Descrição
+Aplicação de console contendo visualizações de algoritmos utilizados pelo Windows XP.
+
+## Status
+Atualmente este projeto está em etapa de refatoração e deploy.
+
 ## Simuladores
 - Sistema de Arquivos FAT32
 
