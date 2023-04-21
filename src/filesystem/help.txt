@@ -1,0 +1,10 @@
+newfile     <filename> <size>   create a new file.
+newdir      <name>              create a new directory.
+delete      <name>              delete a file or a directory.
+goto        <dirname>           enter a directory.
+return                          leave the current directory.
+fileinfo    <filename>          show file info and fragmentation.
+fat                             show info for all files.
+reset                           delete all files and resets simulation.
+help                            show command usage.
+exit                            close the simulation and show credits.
