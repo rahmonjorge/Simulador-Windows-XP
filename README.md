@@ -4,7 +4,8 @@
 Aplicação de console contendo visualizações de algoritmos utilizados pelo Windows XP.
 
 ## Instalação
-Você pode clonar o repositório ou baixar o executável: [Simulador-Windows-XP.zip](https://drive.google.com/file/d/12opPhSMUTRzLhWP9_sPB3UkQZNwxkF7-/view?usp=share_link) 
+Você pode clonar o repositório ou baixar o executável: [Simulador-Windows-XP.zip](https://drive.google.com/file/d/12opPhSMUTRzLhWP9_sPB3UkQZNwxkF7-/view?usp=share_link)
+Execute o arquivo Simulador-Windows-XP.exe dentro da pasta \bin.
 
 ## Simuladores
 - Simulador do Sistema de Arquivos FAT32
